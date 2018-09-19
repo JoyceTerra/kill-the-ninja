@@ -8,7 +8,54 @@ import Paper from 'material-ui/Paper'
 import Board from './Board'
 import './GameDetails.css'
 
+let nextPosX
+let nextPosY
+let curPosX = 9
+let curPosY = 5
+
 class GameDetails extends PureComponent {
+
+
+  moveOnBoard = (e) => {
+    switch(e.target.name){
+        case 'ArrowLeft':
+            if(curPosY > 0){
+                nextPosX = curPosX
+                nextPosY = curPosY - 1
+                console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+                this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
+                //this.changeCurPos(curPosX, curPosY)
+            }
+            break
+
+        case 'ArrowUp':
+            if(curPosX > 0){
+                nextPosY = curPosY
+                nextPosX = curPosX - 1
+                console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+                this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
+            }
+            break
+
+        case 'ArrowRight':
+            if(curPosY < 39){
+                nextPosX = curPosX
+                nextPosY = curPosY + 1
+                console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+                this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
+            }
+            break
+
+            default:
+        
+        //case 'ArrowDown':
+        //    if(curPosX < 9){
+        //        curPosX += 1 
+        //        this.changeCurPos(curPosX, curPosY)
+        //    }
+        //    break
+    }
+}
 
   componentWillMount() {
     if (this.props.authenticated) {
@@ -19,72 +66,22 @@ class GameDetails extends PureComponent {
 
   joinGame = () => this.props.joinGame(this.props.game.id)
 
-  makeMove = (e, toRow, toCell) => {
+  makeMove = (toRow, toCell, fromRow, fromCell) => {
     const {game, updateGame} = this.props
-    console.log(e)
     const board = game.board.map(
       (row, rowIndex) => row.map((cell, cellIndex) => {
         if (rowIndex === toRow && cellIndex === toCell) return game.turn
         else return cell
       })
     )
+    console.log(game.turn)
+    //board[fromRow][fromCell] = null
     updateGame(game.id, board)
   }
 
-
-  moveOnBoard = (event) => {
-    var curElement
-    var nextElement
-    curElement = document.getElementById(`${curPosX}-${curPosY}`)
-    curElement.classList.replace('div-inactive','div-active')
-    switch(event.key){
-        case 'ArrowLeft':
-            if(curPosY > 0){
-                console.log(curPosY)
-                //curElement = document.getElementById(`${curPosX}-${curPosY}`)
-                //curElement.classList.replace('div-active','div-inactive')
-                curPosY -= 1 
-                //nextElement = document.getElementById(`${curPosX}-${curPosY}`)
-                //nextElement.classList.replace('div-inactive','div-active')
-            }
-            break
-
-        case 'ArrowUp':
-            if(curPosX > 0){
-                //curElement = document.getElementById(`${curPosX}-${curPosY}`)
-                //curElement.classList.replace('div-active','div-inactive')
-                curPosX -= 1 
-                //nextElement = document.getElementById(`${curPosX}-${curPosY}`)
-                //nextElement.classList.replace('div-inactive','div-active')
-            }
-            break
-
-        case 'ArrowRight':
-            if(curPosY < 39){
-                //curElement = document.getElementById(`${curPosX}-${curPosY}`)
-                //curElement.classList.replace('div-active','div-inactive')
-                curPosY += 1 
-                //nextElement = document.getElementById(`${curPosX}-${curPosY}`)
-                //nextElement.classList.replace('div-inactive','div-active')
-            }
-            break
-        
-        case 'ArrowDown':
-            if(curPosX < 9){
-                //curElement = document.getElementById(`${curPosX}-${curPosY}`)
-                //curElement.classList.replace('div-active','div-inactive')
-                curPosX += 1 
-                //nextElement = document.getElementById(`${curPosX}-${curPosY}`)
-                //nextElement.classList.replace('div-inactive','div-active')
-            }
-            break
-    }
-}
-
-
   render() {
     const {game, users, authenticated, userId} = this.props
-
+    console.log(game)
     if (!authenticated) return (
 			<Redirect to="/login" />
 		)
@@ -93,12 +90,13 @@ class GameDetails extends PureComponent {
     if (!game) return 'Not found'
 
     const player = game.players.find(p => p.userId === userId)
+    console.log(player)
 
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
 
-    return (<Paper className="outer-paper">
+    return (<div onKeyUp={this.moveOnBoard}><Paper className="outer-paper">
       <h4>
         Game #{game.id} - Status: {game.status}
         {
@@ -123,12 +121,14 @@ class GameDetails extends PureComponent {
       <hr />
 
       {
+        
         game.status !== 'pending' &&
-        <div name="container-board" onKeyUp={this.moveOnBoard(event)}>
           <Board board={game.board} makeMove={this.makeMove} />
-        </div>
       }
-    </Paper>)
+      <button name="ArrowRight" onClick={this.moveOnBoard}>right</button>
+      <button name="ArrowLeft" onClick={this.moveOnBoard}>left</button>
+      <button name="ArrowUp" onClick={this.moveOnBoard}>'up'</button>
+    </Paper></div>)
   }
 }
 

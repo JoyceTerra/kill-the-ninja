@@ -12,7 +12,7 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
     >{symbol || '-'}</div>
   )
 }
-
+ 
 export default ({board, makeMove}) => board.map((cells, rowIndex) =>
   <div key={rowIndex}>
     {cells.map((symbol, cellIndex) => renderCel(makeMove, rowIndex, cellIndex,symbol,false))}
