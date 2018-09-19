@@ -6,7 +6,7 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
     <button
       className="board-tile"
       disabled={hasTurn}
-      onClick={() => makeMove(rowIndex, cellIndex)}
+      onKeyPress={(e) => makeMove(e ,rowIndex, cellIndex)}
       key={`${rowIndex}-${cellIndex}`}
     >{symbol || '-'}</button>
   )
