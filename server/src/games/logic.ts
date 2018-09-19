@@ -5,10 +5,10 @@ import { Board, Symbol, Row } from './entities'
 export class IsBoard implements ValidatorConstraintInterface {
 
   validate(board: Board) {
-    const symbols = [ 'x', 'o', null ]
-    return board.length === 3 &&
+    const symbols = [ 'nA', 'nB', null ]
+    return board.length === 10 &&
       board.every(row =>
-        row.length === 3 &&
+        row.length === 40 &&
         row.every(symbol => symbols.includes(symbol))
       )
   }
@@ -34,7 +34,7 @@ export const calculateWinner = (board: Board): Symbol | null =>
   board
     .concat(
       // vertical winner
-      [0, 1, 2].map(n => board.map(row => row[n])) as Row[]
+      [0, 1, 2, 3].map(n => board.map(row => row[n])) as Row[]
     )
     .concat(
       [
