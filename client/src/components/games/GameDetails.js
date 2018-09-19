@@ -8,16 +8,31 @@ import Paper from 'material-ui/Paper'
 import Board from './Board'
 import './GameDetails.css'
 
-let nextPosX
-let nextPosY
-let curPosX = 9
-let curPosY = 5
-
 class GameDetails extends PureComponent {
 
+  moveOnBoard = (event) => {
+    const {game} = this.props
+    let position = 0
+    let curPosX = 0
+    let curPosY = 0
+    let nextPosX = 0
+    let nextPosY = 0
 
-  moveOnBoard = (e) => {
-    switch(e.target.name){
+    console.log(game)
+
+    if(game.turn === 'nA'){
+      console.log('inside nA', game.turn)
+      position = game.n1.split('-')
+      curPosX = parseInt(position[0])
+      curPosY =parseInt(position[1])
+    }else if(game.turn === 'nB'){
+      console.log('inside nB', game.turn)
+      position = game.n2.split('-')
+      console.log(position)
+      curPosX = parseInt(position[0])
+      curPosY =parseInt(position[1])
+    }
+    switch(event.target.name){
         case 'ArrowLeft':
             if(curPosY > 0){
                 nextPosX = curPosX
@@ -45,6 +60,15 @@ class GameDetails extends PureComponent {
                 this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
             }
             break
+
+        case 'ArrowDown':
+            if(curPosX > 0){
+              nextPosY = curPosY
+              nextPosX = curPosX + 1
+              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+              this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
+          }
+          break
 
             default:
         
@@ -75,13 +99,12 @@ class GameDetails extends PureComponent {
       })
     )
     console.log(game.turn)
-    //board[fromRow][fromCell] = null
+    board[fromRow][fromCell] = null
     updateGame(game.id, board)
   }
 
   render() {
     const {game, users, authenticated, userId} = this.props
-    console.log(game)
     if (!authenticated) return (
 			<Redirect to="/login" />
 		)
@@ -127,7 +150,8 @@ class GameDetails extends PureComponent {
       }
       <button name="ArrowRight" onClick={this.moveOnBoard}>right</button>
       <button name="ArrowLeft" onClick={this.moveOnBoard}>left</button>
-      <button name="ArrowUp" onClick={this.moveOnBoard}>'up'</button>
+      <button name="ArrowUp" onClick={this.moveOnBoard}>up</button>
+      <button name="ArrowDown" onClick={this.moveOnBoard}>down</button>
     </Paper></div>)
   }
 }
