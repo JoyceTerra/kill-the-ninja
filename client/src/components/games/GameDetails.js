@@ -32,6 +32,55 @@ class GameDetails extends PureComponent {
   }
 
 
+  moveOnBoard = (event) => {
+    var curElement
+    var nextElement
+    curElement = document.getElementById(`${curPosX}-${curPosY}`)
+    curElement.classList.replace('div-inactive','div-active')
+    switch(event.key){
+        case 'ArrowLeft':
+            if(curPosY > 0){
+                console.log(curPosY)
+                //curElement = document.getElementById(`${curPosX}-${curPosY}`)
+                //curElement.classList.replace('div-active','div-inactive')
+                curPosY -= 1 
+                //nextElement = document.getElementById(`${curPosX}-${curPosY}`)
+                //nextElement.classList.replace('div-inactive','div-active')
+            }
+            break
+
+        case 'ArrowUp':
+            if(curPosX > 0){
+                //curElement = document.getElementById(`${curPosX}-${curPosY}`)
+                //curElement.classList.replace('div-active','div-inactive')
+                curPosX -= 1 
+                //nextElement = document.getElementById(`${curPosX}-${curPosY}`)
+                //nextElement.classList.replace('div-inactive','div-active')
+            }
+            break
+
+        case 'ArrowRight':
+            if(curPosY < 39){
+                //curElement = document.getElementById(`${curPosX}-${curPosY}`)
+                //curElement.classList.replace('div-active','div-inactive')
+                curPosY += 1 
+                //nextElement = document.getElementById(`${curPosX}-${curPosY}`)
+                //nextElement.classList.replace('div-inactive','div-active')
+            }
+            break
+        
+        case 'ArrowDown':
+            if(curPosX < 9){
+                //curElement = document.getElementById(`${curPosX}-${curPosY}`)
+                //curElement.classList.replace('div-active','div-inactive')
+                curPosX += 1 
+                //nextElement = document.getElementById(`${curPosX}-${curPosY}`)
+                //nextElement.classList.replace('div-inactive','div-active')
+            }
+            break
+    }
+}
+
 
   render() {
     const {game, users, authenticated, userId} = this.props
@@ -75,7 +124,9 @@ class GameDetails extends PureComponent {
 
       {
         game.status !== 'pending' &&
-        <Board board={game.board} makeMove={this.makeMove} />
+        <div name="container-board" onKeyUp={this.moveOnBoard(event)}>
+          <Board board={game.board} makeMove={this.makeMove} />
+        </div>
       }
     </Paper>)
   }

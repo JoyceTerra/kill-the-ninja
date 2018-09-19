@@ -3,12 +3,13 @@ import './Board.css'
 
 const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
   return (
-    <button
-      className="board-tile"
+    <div
+      id={`${rowIndex}-${cellIndex}`}
+      className="one-single-div div-inactive"
       disabled={hasTurn}
-      onKeyPress={(e) => makeMove(e ,rowIndex, cellIndex)}
+     // onKeyPress={(e) => makeMove(e ,rowIndex, cellIndex)}
       key={`${rowIndex}-${cellIndex}`}
-    >{symbol || '-'}</button>
+    >{symbol || '-'}</div>
   )
 }
 
