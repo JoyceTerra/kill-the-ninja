@@ -77,6 +77,6 @@ export class Player extends BaseEntity {
   @Column('char', {length: 2})
   symbol: Symbol
 
-  @Column('char', {length: 5})
+  @Column('char', {length: 5, default: '0-0'})
   currentPosition: string
 }
