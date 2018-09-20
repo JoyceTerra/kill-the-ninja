@@ -4,13 +4,13 @@ import {Redirect} from 'react-router-dom'
 import {getGames, joinGame, updateGame, updatePlayerPosition} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
-import Paper from 'material-ui/Paper'
 import Board from './Board'
 import './GameDetails.css'
 
 class GameDetails extends PureComponent {
 
   moveOnBoard = (event) => {
+    event.preventDefault();
     const {game, userId, updatePlayerPosition} = this.props
     let nextPosX
     let nextPosY
@@ -18,7 +18,8 @@ class GameDetails extends PureComponent {
     let curPosY = 0
 
     const curPlayer = game.players.find(p => p.userId === userId)
-    switch(event.target.name){
+    //switch(event.target.name){
+      switch(event.key){
         case 'ArrowLeft':
           if(curPlayer.symbol === "nA"){
             let positionNA = game.nA.split('-')
@@ -107,7 +108,6 @@ class GameDetails extends PureComponent {
           }
           break
           
-
         case 'ArrowDown':
           if(curPlayer.symbol === "nA"){
             console.log(game.nA)
@@ -149,6 +149,12 @@ class GameDetails extends PureComponent {
     }
   }
 
+  componentDidMount(){
+    document.addEventListener("keyUp", this.moveOnBoard, false)
+    // this.refs.divScreen.focus()
+  }
+
+
   joinGame = () => this.props.joinGame(this.props.game.id)
 
   /*makeMove = (toRow, toCell, fromRow, fromCell) => {
@@ -181,9 +187,7 @@ class GameDetails extends PureComponent {
     return (<div className="outer-paper" >
       <h4>
         Game nº {game.id} - Status: {game.status}
-           
       </h4>
-
 
       {
         game.status === 'pending' &&
@@ -201,16 +205,16 @@ class GameDetails extends PureComponent {
       {
          
         game.status !== 'pending' &&
-        <div className="game-bg">
+        <div className="game-bg" onKeyUp={this.moveOnBoard} tabIndex="-1"  ref="divScreen" >
           <Board board={game.board} nA={game.nA} nB={game.nB} />
         </div>
         
       }
-       {console.log('game board', game.board)}
+       {/* {console.log('game board', game.board)}
       <button name="ArrowRight" onClick={this.moveOnBoard}>right</button>
       <button name="ArrowLeft" onClick={this.moveOnBoard}>left</button>
       <button name="ArrowUp" onClick={this.moveOnBoard}>up</button>
-      <button name="ArrowDown" onClick={this.moveOnBoard}>down</button>
+      <button name="ArrowDown" onClick={this.moveOnBoard}>down</button> */}
       </div>)
   }
 }
