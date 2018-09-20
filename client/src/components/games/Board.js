@@ -6,15 +6,6 @@ let numberA =  nA.split('-')
 let numberB =  nB.split('-')
 
 
-  // console.log("row", rowIndex)
-  // console.log("cell", cellIndex)
-
-  // console.log("nAX", parseInt(numberA[0]))
-  // console.log("nAY",parseInt(numberA[1]))
-  // console.log("nBX", parseInt(numberB[0]))
-  // console.log("nBY",parseInt(numberB[1]))
-
-  
   return (
     <div
       id={`${rowIndex}-${cellIndex}`}

@@ -18,46 +18,28 @@ class GameDetails extends PureComponent {
     let curPosY = 0
 
     const curPlayer = game.players.find(p => p.userId === userId)
-    console.log(curPlayer)
-    
-    //if(curPlayer === "nA"){
-    //  console.log(game.nA)
-    //  curPosX = game.nA.x
-    //  curPosY = game.nA.y
-    //}
-    //else if(curPlayer === "nB"){
-    //  console.log(game.nB)
-    //  curPosX = game.nB.x
-    //  curPosY = game.nB.y
-    //}
     switch(event.target.name){
         case 'ArrowLeft':
           if(curPlayer.symbol === "nA"){
-            console.log(game.nA)
             let positionNA = game.nA.split('-')
             curPosX = positionNA[0]
             curPosY = positionNA[1]
             if(curPosY > 0){
               nextPosX = curPosX
               nextPosY = curPosY - 1
-              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
               const position = `${nextPosX}-${nextPosY}`
-              console.log(position)
-              updatePlayerPosition(game.id, position, game.board, "nA")
+              updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
             }
           }
           else if(curPlayer.symbol === "nB"){
-            console.log(game.nB)
             let positionNB = game.nB.split('-')
             curPosX = positionNB[0]
             curPosY = positionNB[1]
             if(curPosY > 0){
               nextPosX = curPosX
               nextPosY = curPosY - 1
-              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
               const position =  `${nextPosX}-${nextPosY}`
-              console.log(position)
-              updatePlayerPosition(game.id, position, game.board, "nB")
+              updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
             }
           }
           break
@@ -71,48 +53,76 @@ class GameDetails extends PureComponent {
             if(curPosX > 0){
               nextPosX = curPosX -1
               nextPosY = curPosY
-              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
               const position =  `${nextPosX}-${nextPosY}`
-              console.log('jogo com A', position)
               updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
             }
           }
           else if(curPlayer.symbol === "nB"){
-            console.log(game.nB)
             let positionNB = game.nB.split('-')
             curPosX = positionNB[0]
             curPosY = positionNB[1]
             if(curPosX > 0){
               nextPosX = curPosX - 1
               nextPosY = curPosY
-              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
               const position = `${nextPosX}-${nextPosY}`
-              console.log('jogo com B', position)
               updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
             }
           }
           break
 
-        /*case 'ArrowRight':
-            if(curPosY < 39){
-                nextPosX = curPosX
-                nextPosY = curPosY + 1
-                console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-                this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
+        case 'ArrowRight':
+          if(curPlayer.symbol === "nA"){
+            let positionNA = game.nA.split('-')
+            curPosX = positionNA[0]
+            curPosY = positionNA[1]
+            if(curPosY > 0){
+              nextPosX = curPosX
+              nextPosY = curPosY + 1
+              const position = `${nextPosX}-${nextPosY}`
+              updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
             }
-            break
+          }
+          else if(curPlayer.symbol === "nB"){
+            let positionNB = game.nB.split('-')
+            curPosX = positionNB[0]
+            curPosY = positionNB[1]
+            if(curPosY > 0){
+              nextPosX = curPosX
+              nextPosY = curPosY + 1
+              const position =  `${nextPosX}-${nextPosY}`
+              updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+            }
+          }
+          break
+          
 
         case 'ArrowDown':
-          if(curPosX < 9){
-            nextPosY = curPosY
-            nextPosX = curPosX + 1
-            console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-            this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
+          if(curPlayer.symbol === "nA"){
+            console.log(game.nA)
+            let positionNA = game.nA.split('-')
+            curPosX = positionNA[0]
+            curPosY = positionNA[1]
+            if(curPosX > 0){
+              nextPosX = curPosX + 1
+              nextPosY = curPosY
+              const position =  `${nextPosX}-${nextPosY}`
+              updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+            }
           }
-          break*/
+          else if(curPlayer.symbol === "nB"){
+            let positionNB = game.nB.split('-')
+            curPosX = positionNB[0]
+            curPosY = positionNB[1]
+            if(curPosX > 0){
+              nextPosX = curPosX + 1
+              nextPosY = curPosY
+              const position = `${nextPosX}-${nextPosY}`
+              updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+            }
+          }
+          break
 
-            default:
-        
+        default:
     }
 }
 
@@ -125,7 +135,7 @@ class GameDetails extends PureComponent {
 
   joinGame = () => this.props.joinGame(this.props.game.id)
 
-  makeMove = (toRow, toCell, fromRow, fromCell) => {
+  /*makeMove = (toRow, toCell, fromRow, fromCell) => {
     const {game, updateGame} = this.props
     const board = game.board.map(
       (row, rowIndex) => row.map((cell, cellIndex) => {
@@ -135,7 +145,7 @@ class GameDetails extends PureComponent {
     )
     console.log(game.turn)
     updateGame(game.id, board)
-  }
+  }*/
 
   render() {
     const {game, users, authenticated, userId} = this.props
