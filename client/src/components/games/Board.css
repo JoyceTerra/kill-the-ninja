@@ -3,21 +3,26 @@
   width: 25px;
 }
 
-.one-single-div{  
+/* .one-single-div{  
   border: 1px solid black;
   display: inline-block;
   margin: .5px 2.5px;
-}
+} */
 
 .div-active{
   background-color: yellow;
-  width: 30px;
-  height: 30px;
-  zoom: 150%;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  display: inline-block;
+  margin: .5px 2.5px;
 }
 
 .div-inactive{
   background-color: red;
   width: 20px; 
   height: 20px;
+  border: 1px solid black;
+  display: inline-block;
+  margin: .5px 2.5px;
 }

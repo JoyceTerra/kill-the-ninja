@@ -1,20 +1,31 @@
 import React from 'react'
 import './Board.css'
 
-const renderCel = (rowIndex, cellIndex, symbol, hasTurn) => {
+const renderCel = (rowIndex, cellIndex, nA, nB) => {
+let numberA =  nA.split('-')
+let numberB =  nB.split('-')
+
+
+  // console.log("row", rowIndex)
+  // console.log("cell", cellIndex)
+
+  // console.log("nAX", parseInt(numberA[0]))
+  // console.log("nAY",parseInt(numberA[1]))
+  // console.log("nBX", parseInt(numberB[0]))
+  // console.log("nBY",parseInt(numberB[1]))
+
+  
   return (
     <div
       id={`${rowIndex}-${cellIndex}`}
-      className="one-single-div div-inactive"
-      disabled={hasTurn}
-     // onKeyPress={(e) => makeMove(e ,rowIndex, cellIndex)}
+      className={(parseInt(numberA[0]) === rowIndex &&  parseInt(numberA[1]) === cellIndex) ?  'div-active' : 'div-inactive' && (parseInt(numberB[0]) === rowIndex &&  parseInt(numberB[1]) === cellIndex) ?  'div-active' : 'div-inactive'}
       key={`${rowIndex}-${cellIndex}`}
-    >{symbol || '-'}</div>
+    >-</div>
   )
 }
  
-export default ({board}) => board.map((cells, rowIndex) =>
+export default ({board, nA, nB}) => board.map((row, rowIndex) =>
   <div key={rowIndex}>
-    {cells.map((symbol, cellIndex) => renderCel(rowIndex, cellIndex, symbol ,false))}
+    {row.map((cell, cellIndex) => renderCel(rowIndex, cellIndex, nA, nB))}
   </div>
 )

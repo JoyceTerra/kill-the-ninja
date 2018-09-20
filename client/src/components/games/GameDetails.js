@@ -180,7 +180,7 @@ class GameDetails extends PureComponent {
          
         game.status !== 'pending' &&
         
-          <Board board={game.board} />
+          <Board board={game.board} nA={game.nA} nB={game.nB} />
         
       }
        {console.log('game board', game.board)}
