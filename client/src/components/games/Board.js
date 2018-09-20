@@ -11,7 +11,7 @@ let numberB =  nB.split('-')
       id={`${rowIndex}-${cellIndex}`}
       className={(parseInt(numberA[0]) === rowIndex &&  parseInt(numberA[1]) === cellIndex) ?  'div-active-na' : 'div-inactive' && (parseInt(numberB[0]) === rowIndex &&  parseInt(numberB[1]) === cellIndex) ?  'div-active-nb' : 'div-inactive'}
       key={`${rowIndex}-${cellIndex}`}
-    >-</div>
+    ></div>
   )
 }
  

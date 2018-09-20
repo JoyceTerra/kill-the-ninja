@@ -178,7 +178,7 @@ class GameDetails extends PureComponent {
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
 
-    return (<div className="game-bg"><Paper className="outer-paper">
+    return (<div className="outer-paper" >
       <h4>
         Game nº {game.id} - Status: {game.status}
            
@@ -196,13 +196,14 @@ class GameDetails extends PureComponent {
         <p>Winner: {users[winner].firstName}</p>
       }
 
-      <hr />
+    
 
       {
          
         game.status !== 'pending' &&
-        
+        <div className="game-bg">
           <Board board={game.board} nA={game.nA} nB={game.nB} />
+        </div>
         
       }
        {console.log('game board', game.board)}
@@ -210,7 +211,7 @@ class GameDetails extends PureComponent {
       <button name="ArrowLeft" onClick={this.moveOnBoard}>left</button>
       <button name="ArrowUp" onClick={this.moveOnBoard}>up</button>
       <button name="ArrowDown" onClick={this.moveOnBoard}>down</button>
-    </Paper></div>)
+      </div>)
   }
 }
 
