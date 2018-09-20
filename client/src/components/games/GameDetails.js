@@ -28,7 +28,9 @@ class GameDetails extends PureComponent {
               nextPosX = curPosX
               nextPosY = curPosY - 1
               const position = `${nextPosX}-${nextPosY}`
-              updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              if(position !== game.nB){
+                updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              }
             }
           }
           else if(curPlayer.symbol === "nB"){
@@ -39,7 +41,9 @@ class GameDetails extends PureComponent {
               nextPosX = curPosX
               nextPosY = curPosY - 1
               const position =  `${nextPosX}-${nextPosY}`
-              updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              if(position !== game.nA){
+                updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              }
             }
           }
           break
@@ -54,7 +58,9 @@ class GameDetails extends PureComponent {
               nextPosX = curPosX -1
               nextPosY = curPosY
               const position =  `${nextPosX}-${nextPosY}`
-              updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              if(position !== game.nB){
+                updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              }
             }
           }
           else if(curPlayer.symbol === "nB"){
@@ -65,7 +71,9 @@ class GameDetails extends PureComponent {
               nextPosX = curPosX - 1
               nextPosY = curPosY
               const position = `${nextPosX}-${nextPosY}`
-              updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              if(position !== game.nA){
+                updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              }
             }
           }
           break
@@ -79,7 +87,9 @@ class GameDetails extends PureComponent {
               nextPosX = curPosX
               nextPosY = curPosY + 1
               const position = `${nextPosX}-${nextPosY}`
-              updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              if(position !== game.nB){
+                updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              }
             }
           }
           else if(curPlayer.symbol === "nB"){
@@ -90,7 +100,9 @@ class GameDetails extends PureComponent {
               nextPosX = curPosX
               nextPosY = curPosY + 1
               const position =  `${nextPosX}-${nextPosY}`
-              updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              if(position !== game.nA){
+                updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              }
             }
           }
           break
@@ -106,7 +118,9 @@ class GameDetails extends PureComponent {
               nextPosX = curPosX + 1
               nextPosY = curPosY
               const position =  `${nextPosX}-${nextPosY}`
-              updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              if(position !== game.nB){
+                updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              }
             }
           }
           else if(curPlayer.symbol === "nB"){
@@ -117,7 +131,9 @@ class GameDetails extends PureComponent {
               nextPosX = curPosX + 1
               nextPosY = curPosY
               const position = `${nextPosX}-${nextPosY}`
-              updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              if(position !== game.nA){
+                updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              }
             }
           }
           break
