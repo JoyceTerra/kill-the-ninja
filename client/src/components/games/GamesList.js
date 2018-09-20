@@ -31,10 +31,10 @@ class GamesList extends PureComponent {
           }
         </Typography>
         <Typography variant="headline" component="h2">
-          Game #{game.id}
+          GAME nº{game.id}
         </Typography>
         <Typography color="textSecondary">
-          Status: {game.status}
+          STATUS: {game.status}
         </Typography>
       </CardContent>
       <CardActions>

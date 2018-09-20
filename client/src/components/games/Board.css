@@ -14,6 +14,9 @@
   margin: .5px 2.5px;
 }
 
+body{ 
+  background-color: #6F9FBF
+}
 .div-active-nb{
   background-image:url('../../images/yellow-ninja-1.png');
   background-repeat: no-repeat;
