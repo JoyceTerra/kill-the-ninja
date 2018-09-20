@@ -180,12 +180,8 @@ class GameDetails extends PureComponent {
 
     return (<div onKeyUp={this.moveOnBoard}><Paper className="outer-paper">
       <h4>
-        Game #{game.id} - Status: {game.status}
-        {
-          game.status === 'started' &&
-          player && player.symbol === game.turn &&
-          <p>It's your turn!</p>
-        }      
+        Game nº {game.id} - Status: {game.status}
+           
       </h4>
 
 
