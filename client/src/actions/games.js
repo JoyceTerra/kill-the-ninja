@@ -84,34 +84,45 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
     .catch(err => console.error(err))
 }
 
-export const updatePlayerPosition = (gameId, position) => (dispatch, getState) => {
+export const updatePlayerPosition = (gameId, position, board, player, player2) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
 
   if (isExpired(jwt)) return dispatch(logout())
 
   console.log('entrou no action', position)
+  let nA ;
+  let nB ;
   
-  if(position.type === "nA"){
+  if(player === "nA"){
     console.log('entrou no action if nA', position)
-    const nA = position
+    nA = position
+    nB = player2
     console.log(nA)
-    request
-    .patch(`${baseUrl}/games/${gameId}`)
-    .set('Authorization', `Bearer ${jwt}`)
-    .send({ nA })
-    .then(_ => dispatch(updateGameSuccess()))
-    .catch(err => console.error(err))
+    // request
+    // .patch(`${baseUrl}/games/${gameId}`)
+    // .set('Authorization', `Bearer ${jwt}`)
+    // .send({board, nA, nB})
+    // .then(_ => dispatch(updateGameSuccess()))
+    // .catch(err => console.error(err))
   }
-  else if(position.type === "nB"){
-    const nB = position
+  else if(player === "nB"){
+    console.log('entrou no action if nB', position)
+    nB = position
+    nA = player2
     console.log(nB)
-    request
-    .patch(`${baseUrl}/games/${gameId}`)
-    .set('Authorization', `Bearer ${jwt}`)
-    .send({ nB })
-    .then(_ => dispatch(updateGameSuccess()))
-    .catch(err => console.error(err))
+    // request
+    // .patch(`${baseUrl}/games/${gameId}`)
+    // .set('Authorization', `Bearer ${jwt}`)
+    // .send({board, nA, nB})
+    // .then(_ => dispatch(updateGameSuccess()))
+    // .catch(err => console.error(err))
   }
+  request
+  .patch(`${baseUrl}/games/${gameId}`)
+  .set('Authorization', `Bearer ${jwt}`)
+  .send({board, nA, nB})
+  .then(_ => dispatch(updateGameSuccess()))
+  .catch(err => console.error(err))
 
 }

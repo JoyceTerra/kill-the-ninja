@@ -34,28 +34,30 @@ class GameDetails extends PureComponent {
         case 'ArrowLeft':
           if(curPlayer.symbol === "nA"){
             console.log(game.nA)
-            curPosX = game.nA.x
-            curPosY = game.nA.y
+            let positionNA = game.nA.split('-')
+            curPosX = positionNA[0]
+            curPosY = positionNA[1]
             if(curPosY > 0){
               nextPosX = curPosX
               nextPosY = curPosY - 1
               console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-              const position = {type: 'nA', nA:{x: nextPosX , y: nextPosY}} 
+              const position = `${nextPosX}-${nextPosY}`
               console.log(position)
-              updatePlayerPosition(game.id, position)
+              updatePlayerPosition(game.id, position, game.board, "nA")
             }
           }
           else if(curPlayer.symbol === "nB"){
             console.log(game.nB)
-            curPosX = game.nB.x
-            curPosY = game.nB.y
+            let positionNB = game.nB.split('-')
+            curPosX = positionNB[0]
+            curPosY = positionNB[1]
             if(curPosY > 0){
               nextPosX = curPosX
               nextPosY = curPosY - 1
               console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-              const position = {type: 'nB', nB: {x: nextPosX , y: nextPosY}} 
+              const position =  `${nextPosX}-${nextPosY}`
               console.log(position)
-              updatePlayerPosition(game.id, position)
+              updatePlayerPosition(game.id, position, game.board, "nB")
             }
           }
           break
@@ -63,28 +65,30 @@ class GameDetails extends PureComponent {
         case 'ArrowUp':
           if(curPlayer.symbol === "nA"){
             console.log(game.nA)
-            curPosX = game.nA.x
-            curPosY = game.nA.y
+            let positionNA = game.nA.split('-')
+            curPosX = positionNA[0]
+            curPosY = positionNA[1]
             if(curPosX > 0){
               nextPosX = curPosX -1
               nextPosY = curPosY
               console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-              const position = {type: 'nA', nA:{x: nextPosX , y: nextPosY}} 
-              console.log(position)
-              updatePlayerPosition(game.id, position)
+              const position =  `${nextPosX}-${nextPosY}`
+              console.log('jogo com A', position)
+              updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
             }
           }
           else if(curPlayer.symbol === "nB"){
             console.log(game.nB)
-            curPosX = game.nB.x
-            curPosY = game.nB.y
+            let positionNB = game.nB.split('-')
+            curPosX = positionNB[0]
+            curPosY = positionNB[1]
             if(curPosX > 0){
               nextPosX = curPosX - 1
               nextPosY = curPosY
               console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-              const position = {type: 'nB', nB:{x: nextPosX , y: nextPosY}} 
-              console.log(position)
-              updatePlayerPosition(game.id, position)
+              const position = `${nextPosX}-${nextPosY}`
+              console.log('jogo com B', position)
+              updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
             }
           }
           break
@@ -173,10 +177,13 @@ class GameDetails extends PureComponent {
       <hr />
 
       {
-        
+         
         game.status !== 'pending' &&
-          <Board board={game.board} makeMove={this.makeMove} />
+        
+          <Board board={game.board} />
+        
       }
+       {console.log('game board', game.board)}
       <button name="ArrowRight" onClick={this.moveOnBoard}>right</button>
       <button name="ArrowLeft" onClick={this.moveOnBoard}>left</button>
       <button name="ArrowUp" onClick={this.moveOnBoard}>up</button>

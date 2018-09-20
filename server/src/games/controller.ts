@@ -80,7 +80,7 @@ export default class GameController {
     @CurrentUser() user: User,
     @Param('id') gameId: number,
     @Body() update //: GameUpdate
-  ) {
+  ) {console.log("Update", update)
     const game = await Game.findOneById(gameId)
     if (!game) throw new NotFoundError(`Game does not exist`)
 
@@ -88,7 +88,7 @@ export default class GameController {
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
-    if (player.symbol !== game.turn) throw new BadRequestError(`It's not your turn`)
+    //if (player.symbol !== game.turn) throw new BadRequestError(`It's not your turn`)
     //if (!isValidTransition(player.symbol, game.board, update.board)) {
     //  throw new BadRequestError(`Invalid move`)
     //}    
@@ -105,9 +105,11 @@ export default class GameController {
       game.turn = player.symbol === 'nA' ? 'nB' : 'nA'
     }*/
     //game.board = update.board
-    console.log(update)
 
     game.board = update.board
+    game.nA = update.nA
+    game.nB = update.nB
+
     await game.save()
     
     io.emit('action', {
