@@ -52,12 +52,11 @@ export class Game extends BaseEntity {
   @Column('text', {default: 'pending'})
   status: Status
 
-  @Column('text',{default: '9-0'})
-  n1: string
+  @Column('json', {default: {type:'nA', nA:{x:9,y:0}}})
+  nA: {}
 
-  @Column('text', {default: '9-39'})
-  n2: string
-
+  @Column('json', {default: {type: 'nB', nB:{x:9,y:39}}})
+  nB: {}
   // this is a relation, read more about them here:
   // http://typeorm.io/#/many-to-one-one-to-many-relations
   @OneToMany(_ => Player, player => player.game, {eager:true})

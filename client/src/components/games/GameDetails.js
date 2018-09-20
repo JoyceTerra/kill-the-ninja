@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {getGames, joinGame, updateGame} from '../../actions/games'
+import {getGames, joinGame, updateGame, updatePlayerPosition} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
 import Paper from 'material-ui/Paper'
@@ -11,48 +11,85 @@ import './GameDetails.css'
 class GameDetails extends PureComponent {
 
   moveOnBoard = (event) => {
-    const {game} = this.props
-    let position = 0
+    const {game, userId, updatePlayerPosition} = this.props
+    let nextPosX
+    let nextPosY
     let curPosX = 0
     let curPosY = 0
-    let nextPosX = 0
-    let nextPosY = 0
 
-    console.log(game)
-
-    if(game.turn === 'nA'){
-      console.log('inside nA', game.turn)
-      position = game.n1.split('-')
-      curPosX = parseInt(position[0])
-      curPosY =parseInt(position[1])
-    }else if(game.turn === 'nB'){
-      console.log('inside nB', game.turn)
-      position = game.n2.split('-')
-      console.log(position)
-      curPosX = parseInt(position[0])
-      curPosY =parseInt(position[1])
-    }
+    const curPlayer = game.players.find(p => p.userId === userId)
+    console.log(curPlayer)
+    
+    //if(curPlayer === "nA"){
+    //  console.log(game.nA)
+    //  curPosX = game.nA.x
+    //  curPosY = game.nA.y
+    //}
+    //else if(curPlayer === "nB"){
+    //  console.log(game.nB)
+    //  curPosX = game.nB.x
+    //  curPosY = game.nB.y
+    //}
     switch(event.target.name){
         case 'ArrowLeft':
+          if(curPlayer.symbol === "nA"){
+            console.log(game.nA)
+            curPosX = game.nA.x
+            curPosY = game.nA.y
             if(curPosY > 0){
-                nextPosX = curPosX
-                nextPosY = curPosY - 1
-                console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-                this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
-                //this.changeCurPos(curPosX, curPosY)
+              nextPosX = curPosX
+              nextPosY = curPosY - 1
+              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+              const position = {type: 'nA', nA:{x: nextPosX , y: nextPosY}} 
+              console.log(position)
+              updatePlayerPosition(game.id, position)
             }
-            break
+          }
+          else if(curPlayer.symbol === "nB"){
+            console.log(game.nB)
+            curPosX = game.nB.x
+            curPosY = game.nB.y
+            if(curPosY > 0){
+              nextPosX = curPosX
+              nextPosY = curPosY - 1
+              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+              const position = {type: 'nB', nB: {x: nextPosX , y: nextPosY}} 
+              console.log(position)
+              updatePlayerPosition(game.id, position)
+            }
+          }
+          break
 
         case 'ArrowUp':
+          if(curPlayer.symbol === "nA"){
+            console.log(game.nA)
+            curPosX = game.nA.x
+            curPosY = game.nA.y
             if(curPosX > 0){
-                nextPosY = curPosY
-                nextPosX = curPosX - 1
-                console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-                this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
+              nextPosX = curPosX -1
+              nextPosY = curPosY
+              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+              const position = {type: 'nA', nA:{x: nextPosX , y: nextPosY}} 
+              console.log(position)
+              updatePlayerPosition(game.id, position)
             }
-            break
+          }
+          else if(curPlayer.symbol === "nB"){
+            console.log(game.nB)
+            curPosX = game.nB.x
+            curPosY = game.nB.y
+            if(curPosX > 0){
+              nextPosX = curPosX - 1
+              nextPosY = curPosY
+              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+              const position = {type: 'nB', nB:{x: nextPosX , y: nextPosY}} 
+              console.log(position)
+              updatePlayerPosition(game.id, position)
+            }
+          }
+          break
 
-        case 'ArrowRight':
+        /*case 'ArrowRight':
             if(curPosY < 39){
                 nextPosX = curPosX
                 nextPosY = curPosY + 1
@@ -62,22 +99,16 @@ class GameDetails extends PureComponent {
             break
 
         case 'ArrowDown':
-            if(curPosX > 0){
-              nextPosY = curPosY
-              nextPosX = curPosX + 1
-              console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
-              this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
+          if(curPosX < 9){
+            nextPosY = curPosY
+            nextPosX = curPosX + 1
+            console.log(`${curPosX}-${curPosY}|${nextPosX}-${nextPosY}`)
+            this.makeMove(nextPosX, nextPosY, curPosX, curPosY)
           }
-          break
+          break*/
 
             default:
         
-        //case 'ArrowDown':
-        //    if(curPosX < 9){
-        //        curPosX += 1 
-        //        this.changeCurPos(curPosX, curPosY)
-        //    }
-        //    break
     }
 }
 
@@ -99,7 +130,6 @@ class GameDetails extends PureComponent {
       })
     )
     console.log(game.turn)
-    board[fromRow][fromCell] = null
     updateGame(game.id, board)
   }
 
@@ -113,7 +143,6 @@ class GameDetails extends PureComponent {
     if (!game) return 'Not found'
 
     const player = game.players.find(p => p.userId === userId)
-    console.log(player)
 
     const winner = game.players
       .filter(p => p.symbol === game.winner)
@@ -164,7 +193,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGame
+  getGames, getUsers, joinGame, updateGame, updatePlayerPosition
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)

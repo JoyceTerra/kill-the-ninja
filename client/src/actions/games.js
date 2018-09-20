@@ -28,23 +28,6 @@ const joinGameSuccess = () => ({
 })
 
 
-/*export const changeCurPos = () => (x,y,dispatch, getState) => {
-  const state = getState()
-  const jwt = state.currentUser.jwt
-
-  if (isExpired(jwt)) return dispatch(logout())
-
-  request
-    .patch(`${baseUrl}/games/${gameId}`)
-    .set('Authorization', `Bearer ${jwt}`)
-    .send({ board })
-    .then(_ => dispatch(updateGameSuccess()))
-    .catch(err => console.error(err))
-
-
-
-}*/
-
 export const getGames = () => (dispatch, getState) => {
   const state = getState()
   if (!state.currentUser) return null
@@ -99,4 +82,36 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
     .send({ board })
     .then(_ => dispatch(updateGameSuccess()))
     .catch(err => console.error(err))
+}
+
+export const updatePlayerPosition = (gameId, position) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  console.log('entrou no action', position)
+  
+  if(position.type === "nA"){
+    console.log('entrou no action if nA', position)
+    const nA = position
+    console.log(nA)
+    request
+    .patch(`${baseUrl}/games/${gameId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send({ nA })
+    .then(_ => dispatch(updateGameSuccess()))
+    .catch(err => console.error(err))
+  }
+  else if(position.type === "nB"){
+    const nB = position
+    console.log(nB)
+    request
+    .patch(`${baseUrl}/games/${gameId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send({ nB })
+    .then(_ => dispatch(updateGameSuccess()))
+    .catch(err => console.error(err))
+  }
+
 }
