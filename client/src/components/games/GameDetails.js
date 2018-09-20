@@ -178,7 +178,7 @@ class GameDetails extends PureComponent {
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
 
-    return (<div onKeyUp={this.moveOnBoard}><Paper className="outer-paper">
+    return (<div className="game-bg"><Paper className="outer-paper">
       <h4>
         Game nº {game.id} - Status: {game.status}
            
