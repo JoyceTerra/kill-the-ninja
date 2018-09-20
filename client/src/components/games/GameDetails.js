@@ -22,8 +22,8 @@ class GameDetails extends PureComponent {
         case 'ArrowLeft':
           if(curPlayer.symbol === "nA"){
             let positionNA = game.nA.split('-')
-            curPosX = positionNA[0]
-            curPosY = positionNA[1]
+            curPosX = parseInt(positionNA[0])
+            curPosY =parseInt(positionNA[1])
             if(curPosY > 0){
               nextPosX = curPosX
               nextPosY = curPosY - 1
@@ -33,8 +33,8 @@ class GameDetails extends PureComponent {
           }
           else if(curPlayer.symbol === "nB"){
             let positionNB = game.nB.split('-')
-            curPosX = positionNB[0]
-            curPosY = positionNB[1]
+            curPosX = parseInt(positionNB[0])
+            curPosY = parseInt(positionNB[1])
             if(curPosY > 0){
               nextPosX = curPosX
               nextPosY = curPosY - 1
@@ -48,8 +48,8 @@ class GameDetails extends PureComponent {
           if(curPlayer.symbol === "nA"){
             console.log(game.nA)
             let positionNA = game.nA.split('-')
-            curPosX = positionNA[0]
-            curPosY = positionNA[1]
+            curPosX = parseInt(positionNA[0])
+            curPosY = parseInt(positionNA[1])
             if(curPosX > 0){
               nextPosX = curPosX -1
               nextPosY = curPosY
@@ -59,8 +59,8 @@ class GameDetails extends PureComponent {
           }
           else if(curPlayer.symbol === "nB"){
             let positionNB = game.nB.split('-')
-            curPosX = positionNB[0]
-            curPosY = positionNB[1]
+            curPosX = parseInt(positionNB[0])
+            curPosY = parseInt(positionNB[1])
             if(curPosX > 0){
               nextPosX = curPosX - 1
               nextPosY = curPosY
@@ -73,9 +73,9 @@ class GameDetails extends PureComponent {
         case 'ArrowRight':
           if(curPlayer.symbol === "nA"){
             let positionNA = game.nA.split('-')
-            curPosX = positionNA[0]
-            curPosY = positionNA[1]
-            if(curPosY > 0){
+            curPosX = parseInt(positionNA[0])
+            curPosY = parseInt(positionNA[1])
+            if(curPosY < 39){
               nextPosX = curPosX
               nextPosY = curPosY + 1
               const position = `${nextPosX}-${nextPosY}`
@@ -84,9 +84,9 @@ class GameDetails extends PureComponent {
           }
           else if(curPlayer.symbol === "nB"){
             let positionNB = game.nB.split('-')
-            curPosX = positionNB[0]
-            curPosY = positionNB[1]
-            if(curPosY > 0){
+            curPosX = parseInt(positionNB[0])
+            curPosY = parseInt(positionNB[1])
+            if(curPosY < 39){
               nextPosX = curPosX
               nextPosY = curPosY + 1
               const position =  `${nextPosX}-${nextPosY}`
@@ -100,9 +100,9 @@ class GameDetails extends PureComponent {
           if(curPlayer.symbol === "nA"){
             console.log(game.nA)
             let positionNA = game.nA.split('-')
-            curPosX = positionNA[0]
-            curPosY = positionNA[1]
-            if(curPosX > 0){
+            curPosX = parseInt(positionNA[0])
+            curPosY = parseInt(positionNA[1])
+            if(curPosX < 9){
               nextPosX = curPosX + 1
               nextPosY = curPosY
               const position =  `${nextPosX}-${nextPosY}`
@@ -111,9 +111,9 @@ class GameDetails extends PureComponent {
           }
           else if(curPlayer.symbol === "nB"){
             let positionNB = game.nB.split('-')
-            curPosX = positionNB[0]
-            curPosY = positionNB[1]
-            if(curPosX > 0){
+            curPosX = parseInt(positionNB[0])
+            curPosY = parseInt(positionNB[1])
+            if(curPosX < 9){
               nextPosX = curPosX + 1
               nextPosY = curPosY
               const position = `${nextPosX}-${nextPosY}`

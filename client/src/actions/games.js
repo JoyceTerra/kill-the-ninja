@@ -99,24 +99,12 @@ export const updatePlayerPosition = (gameId, position, board, player, player2) =
     nA = position
     nB = player2
     console.log(nA)
-    // request
-    // .patch(`${baseUrl}/games/${gameId}`)
-    // .set('Authorization', `Bearer ${jwt}`)
-    // .send({board, nA, nB})
-    // .then(_ => dispatch(updateGameSuccess()))
-    // .catch(err => console.error(err))
   }
   else if(player === "nB"){
     console.log('entrou no action if nB', position)
     nB = position
     nA = player2
     console.log(nB)
-    // request
-    // .patch(`${baseUrl}/games/${gameId}`)
-    // .set('Authorization', `Bearer ${jwt}`)
-    // .send({board, nA, nB})
-    // .then(_ => dispatch(updateGameSuccess()))
-    // .catch(err => console.error(err))
   }
   request
   .patch(`${baseUrl}/games/${gameId}`)
