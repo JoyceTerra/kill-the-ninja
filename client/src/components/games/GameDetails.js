@@ -19,8 +19,8 @@ class GameDetails extends PureComponent {
 
     const curPlayer = game.players.find(p => p.userId === userId)
     //switch(event.target.name){
-      switch(event.key){
-        case 'ArrowLeft':
+      switch(event.keyCode){
+        case 37: //left
           if(curPlayer.symbol === "nA"){
             let positionNA = game.nA.split('-')
             curPosX = parseInt(positionNA[0])
@@ -49,15 +49,14 @@ class GameDetails extends PureComponent {
           }
           break
 
-        case 'ArrowUp':
+        case 38: //up
           if(curPlayer.symbol === "nA"){
-            console.log(game.nA)
             let positionNA = game.nA.split('-')
             curPosX = parseInt(positionNA[0])
             curPosY = parseInt(positionNA[1])
-            if(curPosX > 0){
-              nextPosX = curPosX -1
-              nextPosY = curPosY
+            if(curPosX > 6){
+              nextPosX = curPosX -3
+              nextPosY = curPosY +3
               const position =  `${nextPosX}-${nextPosY}`
               if(position !== game.nB){
                 updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
@@ -68,9 +67,9 @@ class GameDetails extends PureComponent {
             let positionNB = game.nB.split('-')
             curPosX = parseInt(positionNB[0])
             curPosY = parseInt(positionNB[1])
-            if(curPosX > 0){
-              nextPosX = curPosX - 1
-              nextPosY = curPosY
+            if(curPosX > 6){
+              nextPosX = curPosX - 3
+              nextPosY = curPosY - 3
               const position = `${nextPosX}-${nextPosY}`
               if(position !== game.nA){
                 updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
@@ -79,7 +78,7 @@ class GameDetails extends PureComponent {
           }
           break
 
-        case 'ArrowRight':
+        case 39: //right
           if(curPlayer.symbol === "nA"){
             let positionNA = game.nA.split('-')
             curPosX = parseInt(positionNA[0])
@@ -108,15 +107,15 @@ class GameDetails extends PureComponent {
           }
           break
           
-        case 'ArrowDown':
+        case 40: //down
           if(curPlayer.symbol === "nA"){
             console.log(game.nA)
             let positionNA = game.nA.split('-')
             curPosX = parseInt(positionNA[0])
             curPosY = parseInt(positionNA[1])
             if(curPosX < 9){
-              nextPosX = curPosX + 1
-              nextPosY = curPosY
+              nextPosX = curPosX + 3
+              nextPosY = curPosY - 3
               const position =  `${nextPosX}-${nextPosY}`
               if(position !== game.nB){
                 updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
@@ -128,8 +127,87 @@ class GameDetails extends PureComponent {
             curPosX = parseInt(positionNB[0])
             curPosY = parseInt(positionNB[1])
             if(curPosX < 9){
-              nextPosX = curPosX + 1
-              nextPosY = curPosY
+              nextPosX = curPosX + 3
+              nextPosY = curPosY + 3
+              const position = `${nextPosX}-${nextPosY}`
+              if(position !== game.nA){
+                updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              }
+            }
+          }
+          break
+          case 32: //space
+          if(curPlayer.symbol === "nA"){
+            console.log(game.nA)
+            let positionNA = game.nA.split('-')
+            curPosX = parseInt(positionNA[0])
+            curPosY = parseInt(positionNA[1])
+            if(curPosX < 39){
+              nextPosX = curPosX
+              nextPosY = curPosY + 3
+              const position =  `${nextPosX}-${nextPosY}`
+              if(position !== game.nB){
+                updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              }
+            }
+          }
+          else if(curPlayer.symbol === "nB"){
+            let positionNB = game.nB.split('-')
+            curPosX = parseInt(positionNB[0])
+            curPosY = parseInt(positionNB[1])
+            if(curPosX < 39){
+              nextPosX = curPosX
+              nextPosY = curPosY - 3
+              const position = `${nextPosX}-${nextPosY}`
+              if(position !== game.nA){
+                updatePlayerPosition(game.id, position, game.board, "nB", game.nA)
+              }
+            }
+          }
+          break
+
+          case 90: //z
+          if(curPlayer.symbol === "nA"){
+            let positionNA = game.nA.split('-')
+            curPosX = parseInt(positionNA[0])
+            curPosY = parseInt(positionNA[1])
+            if(curPosX > 6){
+              console.log('before up',curPosY)
+              nextPosX = curPosX - 3
+              nextPosY = curPosY + 4
+              console.log('after up',nextPosY)
+              const position =  `${nextPosX}-${nextPosY}`
+              console.log('before call action up',position)
+              if(position !== game.nB){
+                updatePlayerPosition(game.id, position, game.board, "nA", game.nB)
+              }
+              setTimeout(() => {
+                console.log('state before down ', game.nA)
+                //let positionNA1 = game.nA.split('-')
+                let positionNA1 = position.split('-')
+                let curPosXb = parseInt(positionNA1[0])
+                let curPosYb = parseInt(positionNA1[1])
+                if(curPosXb = 6){
+                  console.log('before down',curPosYb)
+                  let nextPosXb = curPosXb + 3
+                  let nextPosYb = curPosYb + 4
+                  console.log('after down',curPosYb)
+                  const positionA =  `${nextPosXb}-${nextPosYb}`
+                  console.log('before call action down', positionA)
+                  if(positionA !== game.nB){
+                    updatePlayerPosition(game.id, positionA, game.board, "nA", game.nB)
+                  }
+                }
+              }, 100);
+            }
+          }
+          else if(curPlayer.symbol === "nB"){
+            let positionNB = game.nB.split('-')
+            curPosX = parseInt(positionNB[0])
+            curPosY = parseInt(positionNB[1])
+            if(curPosX > 6){
+              nextPosX = curPosX - 3
+              nextPosY = curPosY - 3
               const position = `${nextPosX}-${nextPosY}`
               if(position !== game.nA){
                 updatePlayerPosition(game.id, position, game.board, "nB", game.nA)

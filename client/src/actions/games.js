@@ -90,21 +90,16 @@ export const updatePlayerPosition = (gameId, position, board, player, player2) =
 
   if (isExpired(jwt)) return dispatch(logout())
 
-  console.log('entrou no action', position)
   let nA ;
   let nB ;
   
   if(player === "nA"){
-    console.log('entrou no action if nA', position)
     nA = position
     nB = player2
-    console.log(nA)
   }
   else if(player === "nB"){
-    console.log('entrou no action if nB', position)
     nB = position
     nA = player2
-    console.log(nB)
   }
   request
   .patch(`${baseUrl}/games/${gameId}`)
