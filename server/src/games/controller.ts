@@ -109,6 +109,8 @@ export default class GameController {
     game.board = update.board
     game.nA = update.nA
     game.nB = update.nB
+    game.weapon1nA = update.weapon1nA
+    game.weapon1nB = update.weapon1nB
 
     await game.save()
     

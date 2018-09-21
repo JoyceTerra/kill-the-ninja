@@ -84,27 +84,39 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
     .catch(err => console.error(err))
 }
 
-export const updatePlayerPosition = (gameId, position, board, player, player2) => (dispatch, getState) => {
+export const updatePlayerPosition = (gameId, position, board, player, player2, positionWeapon1, positionWeapon2) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
+  console.log('oque ta vindo weapon', positionWeapon1)
+  console.log('oque ta vindo weapon2', positionWeapon2 )
 
   if (isExpired(jwt)) return dispatch(logout())
 
-  let nA ;
-  let nB ;
+
+  let nA 
+  let nB 
+  let weapon1nA
+  let weapon1nB
+
   
   if(player === "nA"){
     nA = position
     nB = player2
+    weapon1nA = positionWeapon1
+    weapon1nB = positionWeapon2
+  console.log('ta entrando?',  weapon1nA)
   }
   else if(player === "nB"){
+    
     nB = position
     nA = player2
+    weapon1nA = positionWeapon1
+    weapon1nB = positionWeapon2
   }
   request
   .patch(`${baseUrl}/games/${gameId}`)
   .set('Authorization', `Bearer ${jwt}`)
-  .send({board, nA, nB})
+  .send({board, nA, nB, weapon1nA, weapon1nB})
   .then(_ => dispatch(updateGameSuccess()))
   .catch(err => console.error(err))
 

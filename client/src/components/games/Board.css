@@ -6,6 +6,27 @@ body{
   height: 50px;
   width: 25px;
 }
+.div-active-wa{
+  background-image:url('../../images/weapon1.png');
+  background-repeat: no-repeat;
+  background-size: 70%;
+  width: 86px;
+  height: 131px;
+  display: inline-block;
+  margin: .5px 2.5px;
+  
+}
+
+.div-active-wb{
+  background-image:url('../../images/weapon1.png');
+  background-repeat: no-repeat;
+  background-size:  70%;
+  width: 86px;
+  height: 131px;
+  display: inline-block;
+  margin: .5px 2.5px;
+  
+}
 
 .div-active-na{
   background-image:url('../../images/red-ninja-1.png');
@@ -15,7 +36,7 @@ body{
   height: 131px;
   display: inline-block;
   margin: .5px 2.5px;
-  z-index: 999;
+  /* z-index: 999; */
 }
 
 .div-active-nb{
@@ -26,18 +47,13 @@ body{
   height: 131px;
   display: inline-block;
   margin: .5px 2.5px;
-  z-index: 0;
+  /* z-index: 0; */
 }
 
 .div-inactive{
   width: 86px; 
-  border: 1px solid black;
   height: 131px;
   display: inline-block;
   margin: .5px 2.5px;
 }
 
-/* .div-row{
-  margin: 0px;
-
-} */

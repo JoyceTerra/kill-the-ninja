@@ -47,11 +47,17 @@ export class Game extends BaseEntity {
   @Column('text', {default: '4-14'})
   nB: string
 
-  // @Column('text')
-  // weapon1nA: string
+  @Column('text', {default: '4-0'})
+  weapon1nA: string
 
-  // @Column('text')
-  // weapon1nB: string
+  @Column('text', {default: '4-14'})
+  weapon1nB: string
+
+  @Column('int', {default: 5})
+  lifeA: number
+
+  @Column('int', {default: 5})
+  lifeB: number 
   // this is a relation, read more about them here:
   // http://typeorm.io/#/many-to-one-one-to-many-relations
   @OneToMany(_ => Player, player => player.game, {eager:true})
