@@ -264,7 +264,7 @@ class GameDetails extends PureComponent {
 
     return (<div className="outer-paper" >
       <h4>
-        Game nº {game.id} - Status: {game.status}
+        GAME nº {game.id} - STATUS: {game.status}
       </h4>
 
       {

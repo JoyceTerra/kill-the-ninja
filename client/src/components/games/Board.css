@@ -1,3 +1,7 @@
+body{ 
+  background-color: #D45937; 
+}
+
 .board-tile {
   height: 50px;
   width: 25px;
