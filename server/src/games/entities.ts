@@ -6,32 +6,21 @@ export type Row = [
   Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null,
   Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null,
   Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null
-  //Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null,
-  //Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null,
-  //Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null,
-  //Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null,
-  //Symbol | null, Symbol | null, Symbol | null, Symbol | null, Symbol | null
 ]
 export type Board = [ 
-  Row, Row, Row, Row, Row, 
-  Row, Row, Row
+  Row, Row, Row, Row, Row
 ]
 
 type Status = 'pending' | 'started' | 'finished'
 
 const emptyRow: Row = [
-  //null, null, null, null, null,
-  //null, null, null, null, null,
-  //null, null, null, null, null,
-  //null, null, null, null, null,
-  //null, null, null, null, null,
   null, null, null, null, null,
   null, null, null, null, null,
   null, null, null, null, null
 ]
 const emptyBoard: Board = [
-  emptyRow, emptyRow, emptyRow, emptyRow, emptyRow,
-  emptyRow, emptyRow, emptyRow
+  emptyRow, emptyRow, emptyRow, emptyRow, emptyRow
+  // emptyRow, emptyRow, emptyRow
 ]
 
 @Entity()
@@ -52,10 +41,10 @@ export class Game extends BaseEntity {
   @Column('text', {default: 'pending'})
   status: Status
 
-  @Column('text', {default: '7-0'})
+  @Column('text', {default: '4-0'})
   nA: string
 
-  @Column('text', {default: '7-14'})
+  @Column('text', {default: '4-14'})
   nB: string
   // this is a relation, read more about them here:
   // http://typeorm.io/#/many-to-one-one-to-many-relations

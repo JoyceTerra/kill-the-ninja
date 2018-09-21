@@ -11,9 +11,8 @@ body{
   background-image:url('../../images/red-ninja-1.png');
   background-repeat: no-repeat;
   background-size: contain;
-  position: relative;
-  width: 89px;
-  height: 140px;
+  width: 86px;
+  height: 131px;
   display: inline-block;
   margin: .5px 2.5px;
   z-index: 999;
@@ -23,18 +22,22 @@ body{
   background-image:url('../../images/yellow-ninja-1.png');
   background-repeat: no-repeat;
   background-size: contain;
-  position: absolute;
-  width: 96px;
-  height: 150px;
+  width: 89px;
+  height: 131px;
   display: inline-block;
   margin: .5px 2.5px;
   z-index: 0;
 }
 
 .div-inactive{
-  width: 70px; 
+  width: 86px; 
   border: 1px solid black;
-  height: 70px;
+  height: 131px;
   display: inline-block;
   margin: .5px 2.5px;
 }
+
+/* .div-row{
+  margin: 0px;
+
+} */

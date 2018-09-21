@@ -16,7 +16,7 @@ let numberB =  nB.split('-')
 }
  
 export default ({board, nA, nB}) => board.map((row, rowIndex) =>
-  <div key={rowIndex}>
+  <div className="div-row" key={rowIndex}>
     {row.map((cell, cellIndex) => renderCel(rowIndex, cellIndex, nA, nB))}
   </div>
 )
